@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Система работы со студентами | Добавить студента</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+<div class="bg-image"
+     style="background-image: url('https://palchevsky.ru/images/background.jpg'); height: 100vh; overflow: auto">
+    <blockquote class="blockquote text-center"><h1>Добавить студента факультета ГС Сковороды</h1></blockquote>
+    <div class="row">
+        <div class="col-md-8 offset-md-4">
+            <form action="#" th:action="@{/save}" th:object="${student}" method="post">
+                <table>
+                    <tr>
+                        <td>ID студента:</td>
+                        <td><input type="text" th:field="*{id}"></td>
+                    </tr>
+                    <tr>
+                        <td>Имя:</td>
+                        <td><input type="text" th:field="*{first}"></td>
+                    </tr>
+                    <tr>
+                        <td>Фамилия:</td>
+                        <td><input type="text" th:field="*{last}"></td>
+                    </tr>
+                    <tr>
+                        <td>Номер студенческого:</td>
+                        <td><input type="text" th:field="*{num}"></td>
+                    </tr>
+                    <tr>
+                        <td>Средний балл:</td>
+                        <td><input type="text" onkeyup="this.value = this.value.replace(/\.(?=.*\.)|[^\d\.-]/g, '');"
+                                   onchange="this.value = this.value.replace(/\.(?=.*\.)|[^\d\.-]/g, '');"
+                                   th:field="*{av}"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="submit" class="btn btn-primary" data-tooggle="button" aria-pressed="false" autocomplete="off">Сохранить</button>
+                        </td>
+                    </tr>
+                </table>
+        </form>
+    </div>
+    </div>
+</div>
+</body>
+</html>

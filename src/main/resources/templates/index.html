@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Система работы со студентами</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+<div class="bg-image"
+     style="background-image: url('https://palchevsky.ru/images/background.jpg'); height: 100vh; overflow: auto">
+    <blockquote class="blockquote text-center"><h1>Студенты факультета Физ Воспитания</h1></blockquote>
+    <div class="row">
+        <div class="col-md-8 offset-md-4">
+            <h4>Поиск студента по любому критерию:</h4>
+            <form th:action="@{/}">
+                <input type="text" name="keyword" id="keyword" size="70" th:value="${keyword}" required/>
+                <input type="submit" class="btn btn-success btn-sm" value="Поиск"/>
+                <input type="button" class="btn btn-warning btn-sm" value="Очистить" id="btnClear"
+                       onclick="clearSearch()"/>
+            </form>
+        </div>
+    </div>
+    <table id="1" class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th scope="col">ID студента</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Номер студенческого</th>
+            <th scope="col">Средний балл</th>
+            <th scope="col">Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student: ${listStudents}">
+            <th scope="row" class="text-white" th:text="${student.id}">ID студента отстутсвует</th>
+            <th scope="row" class="text-white" th:text="${student.first}">Имя студента отсутствует</th>
+            <th scope="row" class="text-white" th:text="${student.last}">Фамилия студента отсутствует</th>
+            <th scope="row" class="text-white" th:text="${student.num}">Номер студенческого отсутствует</th>
+            <th scope="row" class="text-white" th:text="${student.av}">Средний балл студента отсутствует</th>
+            <td>
+                <a th:href="@{'/edit/'+${student.id}}"><button type="button" class="btn btn-info">Редактировать</button></a>
+                <a th:href="@{'/delete/'+${student.id}}"><button type="button" class="btn btn-danger">Удалить</button></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <p class="text-white">
+        <script type="text/javascript">
+            function getRowsColumn() {
+                let table = document.getElementById('1')
+                let tBody = table.querySelector('tbody')
+                const count = tBody.querySelectorAll('tr').length;
+                document.write('Количество студентов в таблице: ' + count)
+            }
+
+            getRowsColumn()
+        </script>
+    </p>
+    <blockquote class="blockquote text-center">
+        <a href="/new">
+            <button type="button" class="btn btn-primary" data-togge="button" aria-pressed="false" autocomplete="off">
+                Добавить студента
+            </button>
+        </a>
+    </blockquote>
+</div>
+<script type="text/javascript">
+    function clearSearch() {
+        window.location = "[[@{/}]]";
+    }
+</script>
+</body>
+</html>
